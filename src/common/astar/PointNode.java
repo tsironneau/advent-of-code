@@ -6,6 +6,6 @@ public record PointNode(Point point) implements Node<Point> {
 
     @Override
     public Point getId() {
-        return null;
+        return point;
     }
 }
