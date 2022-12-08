@@ -2,6 +2,7 @@ package y2022.day8;
 
 import common.IPoint;
 import common.Point;
+import common.parsing.ParsingUtils;
 
 import java.util.*;
 
@@ -21,19 +22,8 @@ public class Day8_1 {
     private static int puzzle(List<String> collect) {
 
         Set<Tree> visibleTrees = new HashSet<>();
-        Map<Point, Tree> treeMap = new HashMap<>();
 
-        for (int i = 0; i < collect.size(); i++) {
-            String s = collect.get(i);
-            String[] split = s.split("");
-            for (int j = 0; j < split.length; j++) {
-                String s1 = split[j];
-                int size = Integer.parseInt(s1);
-
-                Tree tree = new Tree(new Point(i, j), size);
-                treeMap.put(tree.pos, tree);
-            }
-        }
+        Map<IPoint, Tree> treeMap = ParsingUtils.toPointMapXLinesYColumns(collect, "", (p, s) -> new Tree(p, Integer.parseInt(s)));
 
         int height = collect.size();
         int length = collect.get(0).length();
@@ -89,7 +79,7 @@ public class Day8_1 {
         return visibleTrees.size();
     }
 
-    record Tree(Point pos, int size) implements IPoint {
+    record Tree(IPoint pos, int size) implements IPoint {
 
         @Override
         public int x() {
