@@ -13,58 +13,51 @@ public class ParsingUtils {
     //↑↑←→↓
 
     /**
-     * x = lines
-     * y = columns
-     * 0 → y
-     * ↓
-     * x
+     * x = lines<br>
+     * y = columns<br>
+     * 0 → y<br>
+     * ↓<br>
+     * x<br>
      *
      * @param lines puzzle input lines
      * @param splitBy separator of element of the grid
      * @param supplier new element of the grid
      * @return a map representing the grid with x as line and y as columns
-     * @param <T>
+     * @param <T> type of the element of the grid
      */
     public static <T> Map<IPoint, T> toPointMapXLinesYColumns(List<String> lines, String splitBy, BiFunction<IPoint, String, T> supplier){
-        Map<IPoint, T> result = new HashMap<>();
-
-        for (int line = 0; line < lines.size(); line++) {
-            String s = lines.get(line);
-            String[] split = s.split(splitBy);
-            for (int column = 0; column < split.length; column++) {
-                String element = split[column];
-
-                Point pos = new Point(line, column);
-                result.put(pos, supplier.apply(pos, element));
-            }
-        }
-
-        return result;
+        return toPointMap(lines, splitBy, supplier, Point::new);
     }
 
     /**
-     * x = columns
-     * y = lines
-     * 0 → x
-     * ↓
-     * y
+     * x = columns<br>
+     * y = lines<br>
+     * 0 → x<br>
+     * ↓<br>
+     * y<br>
      *
      * @param lines puzzle input lines
      * @param splitBy separator of element of the grid
      * @param supplier new element of the grid
      * @return a map representing the grid with x as columns and y as lines
-     * @param <T>
+     * @param <T> type of the element of the grid
      */
     public static <T> Map<IPoint, T> toPointMapXColumnsYLines(List<String> lines, String splitBy, BiFunction<IPoint, String, T> supplier){
+        return toPointMap(lines, splitBy, supplier, (line, column) -> new Point(column, line));
+    }
+
+    private static <T> Map<IPoint, T> toPointMap(List<String> lines, String splitBy,
+                                                 BiFunction<IPoint, String, T> supplier,
+                                                 BiFunction<Integer, Integer, IPoint> iPointSupplier) {
         Map<IPoint, T> result = new HashMap<>();
 
         for (int line = 0; line < lines.size(); line++) {
             String s = lines.get(line);
-            String[] split = s.split(splitBy);
-            for (int column = 0; column < split.length; column++) {
-                String element = split[column];
+            String[] elements = s.split(splitBy);
+            for (int column = 0; column < elements.length; column++) {
+                String element = elements[column];
 
-                Point pos = new Point(column, line);
+                IPoint pos = iPointSupplier.apply(line, column);
                 result.put(pos, supplier.apply(pos, element));
             }
         }
