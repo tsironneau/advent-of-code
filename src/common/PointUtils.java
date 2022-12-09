@@ -1,16 +1,14 @@
 package common;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class PointUtils {
 
     public static Set<Point> computeNeighbours(final int x, final int y, final int xMax, final int yMax) {
-        final int iMin = Math.max(0, x - 1);
+        final int iMin = x - 1;
         final int iMax = Math.min(xMax, x + 1);
-        final int jMin = Math.max(0, y - 1);
+        final int jMin = y - 1;
         final int jMax = Math.min(yMax, y + 1);
 
         final Set<Point> result = new HashSet<>();
