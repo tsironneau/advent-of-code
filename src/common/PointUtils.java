@@ -6,9 +6,9 @@ import java.util.Set;
 public class PointUtils {
 
     public static Set<Point> computeNeighbours(final int x, final int y, final int xMax, final int yMax) {
-        final int iMin = x - 1;
+        final int iMin = Math.max(Integer.MIN_VALUE, x - 1);
         final int iMax = Math.min(xMax, x + 1);
-        final int jMin = y - 1;
+        final int jMin = Math.max(Integer.MIN_VALUE, y - 1);
         final int jMax = Math.min(yMax, y + 1);
 
         final Set<Point> result = new HashSet<>();
@@ -50,6 +50,7 @@ public class PointUtils {
 
         return result;
     }
+
     public static Set<Point> computeOrthogonalNeighbours(final IPoint point) {
         return computeOrthogonalNeighbours(point, Integer.MAX_VALUE, Integer.MAX_VALUE);
     }

@@ -1,6 +1,7 @@
 package y2022.day9;
 
 import common.IPoint;
+import common.NeighbourComputer;
 import common.Point;
 import common.PointUtils;
 
@@ -16,6 +17,7 @@ public class Day9_2 {
 
         int result = puzzle(collect);
 
+        //2604
         System.out.println(result);
     }
 
@@ -57,7 +59,7 @@ public class Day9_2 {
     }
 
     private static Point updateTail(Point tailPos, IPoint headPos) {
-        Set<Point> neighbours = PointUtils.computeNeighbours(headPos.x(), headPos.y());
+        Set<Point> neighbours = new NeighbourComputer().compute(headPos);
         if (neighbours.contains(tailPos))
             return tailPos;
 
