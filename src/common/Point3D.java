@@ -27,4 +27,12 @@ public record Point3D(int x, int y, int z) {
     public long distanceTo(final Point3D p2) {
         return Math.abs(x - p2.x) + Math.abs(y - p2.y) + Math.abs(z - p2.z);
     }
+
+    public Point3D add(Point3D point3D) {
+        return add(point3D.x, point3D.y, point3D.z);
+    }
+
+    public Point3D add(int x1, int y1, int z1) {
+        return Point3D.of(this.x + x1, this.y + y1, this.z + z1);
+    }
 }
