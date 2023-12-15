@@ -1,12 +1,19 @@
 from collections import defaultdict
+import re
 
-def solution():
-    with open('input.txt') as f:
+EXPECTED = 0
+
+
+def solution(file):
+    with open(file) as f:
         lines = f.readlines()
 
         return 0
 
 
 if __name__ == '__main__':
-    print(solution())
 
+    ex = solution('example.txt')
+    if ex == EXPECTED:
+        print("example", ex)
+        print("solution", solution('input.txt'))
