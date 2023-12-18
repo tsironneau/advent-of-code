@@ -6,7 +6,7 @@ EXPECTED = 0
 
 def solution(file):
     with open(file) as f:
-        lines = f.readlines()
+        lines = f.read().splitlines()
 
         return 0
 
