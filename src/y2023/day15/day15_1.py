@@ -7,16 +7,14 @@ def solution():
 
         split = lines[0].split(',')
 
-        result = 0
-        for entry in split:
-            current = 0
-            for c in entry:
-                current += ord(c)
-                current = current * 17
-                current = current % 256
-            result += current
+        return sum(map(hash, split))
 
-        return result
+
+def hash(entry):
+    current = 0
+    for c in entry:
+        current = (current + ord(c)) * 17 % 256
+    return current
 
 
 if __name__ == '__main__':

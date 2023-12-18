@@ -17,9 +17,7 @@ def solution(file):
             code = re.split("[= -]", entry)
             lens_id = code[0]
             for c in lens_id:
-                key += ord(c)
-                key = key * 17
-                key = key % 256
+                key = (key + ord(c)) * 17 % 256
 
             if '=' in entry:
                 lens[lens_id] = int(code[1])

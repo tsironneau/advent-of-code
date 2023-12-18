@@ -14,10 +14,7 @@ def find_number(line):
 def solution():
     with open('input.txt') as f:
         lines = f.readlines()
-        res = 0
-        for line in lines:
-            res += find_number(line)
-        return res
+        return sum(map(find_number, lines))
 
 
 if __name__ == '__main__':
